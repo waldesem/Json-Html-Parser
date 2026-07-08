@@ -1,9 +1,7 @@
 import { localStr } from '@/utils'
-import { Schemas } from '@/types'
+import type { Schemas } from '@/types'
 
 export const schema: Schemas[] = [
-  { keys: ['positionName', 'department'], tag: 'caption' },
-  { keys: ['lastName', 'firstName', 'midName'], tag: 'thead' },
   {
     key: 'birthday',
     label: 'Дата рождения',
@@ -34,7 +32,7 @@ export const schema: Schemas[] = [
     key: 'education',
     label: 'Образование',
     items: [
-      { key: 'educationType', label: 'Уровень', attr: "class='fw-semibold'" },
+      { key: 'educationType', label: 'Уровень', attr: { class: 'fw-semibold' } },
       { key: 'institutionName', label: 'Учебное заведение' },
       { key: 'endYear', label: 'Год окончания' },
       { key: 'specialty', label: 'Специальность' },
@@ -44,7 +42,7 @@ export const schema: Schemas[] = [
     key: 'experience',
     label: 'Работа',
     items: [
-      { key: 'name', label: 'Место работы', attr: "class='fw-semibold'" },
+      { key: 'name', label: 'Место работы', attr: { class: 'fw-semibold' } },
       { key: 'beginDate', label: 'Приём', foo: (row: string) => localStr(row) },
       {
         key: 'endDate',
@@ -72,7 +70,7 @@ export const schema: Schemas[] = [
     key: 'organizations',
     label: 'Участие в коммерческой деятельности',
     items: [
-      { key: 'name', label: 'Название', attr: "class='fw-medium'" },
+      { key: 'name', label: 'Название', attr: { class: 'fw-medium' } },
       { key: 'activity', label: 'Вид деятельности' },
       { key: 'inn', label: 'ИНН' },
     ],

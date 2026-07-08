@@ -63,7 +63,7 @@ export interface Items {
   key: string
   label: string
   foo?: Function
-  attr?: string
+  attr?: object
 }
 
 export interface Schemas {
@@ -72,6 +72,6 @@ export interface Schemas {
   label?: string
   tag?: 'caption' | 'thead'
   foo?: Function
-  attr?: string
+  attr?: object
   items?: Items[]
 }

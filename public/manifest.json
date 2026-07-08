@@ -4,8 +4,9 @@
   "description": "Convert JSON to HTML",
   "version": "1.0.0",
   "host_permissions": ["file:///*"],
-  "permissions": ["scripting", "activeTab", "tabs"],
-  "action": {
-    "default_popup": "popup.html"
+  "permissions": ["scripting", "tabs"],
+  "action": {},
+  "background": {
+    "service_worker": "background.js"
   }
 }
