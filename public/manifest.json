@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Json To Html",
+  "description": "Convert JSON to HTML",
+  "version": "1.0.0",
+  "host_permissions": ["file:///*"],
+  "permissions": ["scripting", "activeTab", "tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
