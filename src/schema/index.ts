@@ -1,5 +1,6 @@
-import { localStr } from '@/utils'
 import type { Schemas } from '@/types'
+
+const localStr = (str: string) => (str ? new Date(str).toLocaleDateString() : '')
 
 export const schema: Schemas[] = [
   {
@@ -32,7 +33,7 @@ export const schema: Schemas[] = [
     key: 'education',
     label: 'Образование',
     items: [
-      { key: 'educationType', label: 'Уровень', attr: { class: 'fw-semibold' } },
+      { key: 'educationType', label: 'Уровень', attr: { class: 'fw-medium' } },
       { key: 'institutionName', label: 'Учебное заведение' },
       { key: 'endYear', label: 'Год окончания' },
       { key: 'specialty', label: 'Специальность' },
@@ -42,14 +43,18 @@ export const schema: Schemas[] = [
     key: 'experience',
     label: 'Работа',
     items: [
-      { key: 'name', label: 'Место работы', attr: { class: 'fw-semibold' } },
+      { key: 'name', label: 'Место работы', attr: { class: 'fw-medium' } },
       { key: 'beginDate', label: 'Приём', foo: (row: string) => localStr(row) },
       {
         key: 'endDate',
         label: 'Увольнение',
         foo: (row: string) => localStr(row),
       },
-      { key: 'currentJob', label: 'Текущая работа' },
+      {
+        key: 'currentJob',
+        label: 'Текущая работа',
+        foo: (row: string) => (Boolean(row) ? 'Да' : 'Нет'),
+      },
       { key: 'position', label: 'Должность' },
       { key: 'address', label: 'Адрес' },
       { key: 'fireReason', label: 'Причина увольнения' },

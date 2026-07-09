@@ -12,11 +12,11 @@ const data = props.field.foo ? props.value : row
 </script>
 
 <template>
-  <tr v-if="!props.field.key">
-    <th colspan="2">{{ props.field.label }}</th>
-  </tr>
-  <tr v-else-if="data">
-    <td>{{ props.field.label }}</td>
-    <td v-bind="props.field.attr">{{ data }}</td>
-  </tr>
+  <div v-if="!props.field.key" class="row">
+    <div class="col fw-semibold">{{ props.field.label }}</div>
+  </div>
+  <div v-else-if="data" class="row">
+    <div v-bind="props.field.attr" class="col-4">{{ props.field.label }}</div>
+    <div class="col-8">{{ data }}</div>
+  </div>
 </template>

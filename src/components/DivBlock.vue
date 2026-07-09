@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TableRow from './TableRow.vue'
+import DivRow from './DivRow.vue'
 import type { Expirience, Education, Names, Organizations, Items } from '@/types'
 
 const props = defineProps<{
@@ -10,12 +10,12 @@ const props = defineProps<{
 </script>
 
 <template>
-  <tr v-if="datas.length">
-    <th colspan="2">{{ props.label }}</th>
-  </tr>
-  <template v-for="data in datas">
+  <div v-if="datas.length" class="row mt-2">
+    <div class="col fw-semibold">{{ props.label }}</div>
+  </div>
+  <div v-for="data in datas" class="d-grid gap-0 row-gap-2">
     <template v-for="field in props.fields">
-      <TableRow :value="data[field.key as keyof typeof data]" :field="field" />
+      <DivRow :value="data[field.key as keyof typeof data]" :field="field" />
     </template>
-  </template>
+  </div>
 </template>

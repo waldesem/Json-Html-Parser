@@ -2,8 +2,8 @@
 import { shallowRef, useTemplateRef } from 'vue'
 import { useAnimate, useFileDialog } from '@vueuse/core'
 import { schema } from './schema'
-import TableBody from './components/TableBody.vue'
-import TableRow from './components/TableRow.vue'
+import DivBlock from './components/DivBlock.vue'
+import DivRow from './components/DivRow.vue'
 import type { Conditions, Data } from './types'
 
 const { open, onChange } = useFileDialog({
@@ -21,6 +21,7 @@ onChange(async (files) => {
 })
 
 const el = useTemplateRef('el')
+
 useAnimate(
   el,
   [
@@ -39,30 +40,29 @@ useAnimate(
 
 <template>
   <div class="container-fluid">
+    <button type="button" class="btn btn-outline-primary" @click="open()">Выбрать файл</button>
     <Transition>
-      <table v-if="data" class="table caption-top">
-        <caption class="fw-semibold">
-          {{
-            `${data.positionName} ${data.department}`
-          }}
-        </caption>
-        <tbody>
-          <tr>
-            <th colspan="2">
-              {{ `${data.lastName} ${data.firstName} ${data.midName ?? ''}`.toUpperCase() }}
-            </th>
-          </tr>
-          <template v-for="field of schema">
-            <TableBody
-              v-if="field.items"
-              :datas="data[field.key as keyof Conditions]"
-              :fields="field.items"
-              :label="field.label"
-            />
-            <TableRow v-else :value="data[field.key as keyof Data]" :field="field" />
-          </template>
-        </tbody>
-      </table>
+      <div v-if="data" class="d-grid gap-0 row-gap-2">
+        <div class="row">
+          <div class="col fw-semibold">
+            {{ `${data.positionName} ${data.department}` }}
+          </div>
+        </div>
+        <div class="row border-bottom">
+          <div class="col fw-bold">
+            {{ `${data.lastName} ${data.firstName} ${data.midName ?? ''}`.toUpperCase() }}
+          </div>
+        </div>
+        <template v-for="field of schema">
+          <DivBlock
+            v-if="field.items"
+            :datas="data[field.key as keyof Conditions]"
+            :fields="field.items"
+            :label="field.label"
+          />
+          <DivRow v-else :value="data[field.key as keyof Data]" :field="field" />
+        </template>
+      </div>
       <div v-else class="position-absolute top-50 start-50 translate-middle row gy-4">
         <p ref="el" class="text-center text-primary-emphasis display-1">JSON TO HTML</p>
         <button type="button" class="btn btn-outline-primary" @click="open()">Выбрать файл</button>
