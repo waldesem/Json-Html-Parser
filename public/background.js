@@ -1,3 +1,4 @@
 chrome.action.onClicked.addListener((tab) => {
-  chrome.tabs.create({ url: 'https://example.com' })
+  const internalUrl = chrome.runtime.getURL('index.html')
+  chrome.tabs.create({ url: internalUrl })
 })

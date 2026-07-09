@@ -13,9 +13,9 @@ const props = defineProps<{
   <tr v-if="datas.length">
     <th colspan="2">{{ props.label }}</th>
   </tr>
-  <tr v-for="data in datas">
+  <template v-for="data in datas">
     <template v-for="field in props.fields">
       <TableRow :value="data[field.key as keyof typeof data]" :field="field" />
     </template>
-  </tr>
+  </template>
 </template>
