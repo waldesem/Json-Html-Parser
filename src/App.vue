@@ -22,7 +22,7 @@ onChange(async (files) => {
 
 const el = useTemplateRef('el')
 
-useAnimate(
+const { finish } = useAnimate(
   el,
   [
     { clipPath: 'circle(20% at 0% 30%)' },
@@ -40,7 +40,6 @@ useAnimate(
 
 <template>
   <div class="container-fluid">
-    <button type="button" class="btn btn-outline-primary" @click="open()">Выбрать файл</button>
     <Transition>
       <div v-if="data" class="d-grid gap-0 row-gap-2">
         <div class="row">
@@ -50,7 +49,9 @@ useAnimate(
         </div>
         <div class="row border-bottom">
           <div class="col fw-bold">
-            {{ `${data.lastName} ${data.firstName} ${data.midName ?? ''}`.toUpperCase() }}
+            {{
+              `${data.lastName} ${data.firstName} ${data.midName ?? ''}`.toUpperCase()
+            }}
           </div>
         </div>
         <template v-for="field of schema">
@@ -60,12 +61,29 @@ useAnimate(
             :fields="field.items"
             :label="field.label"
           />
-          <DivRow v-else :value="data[field.key as keyof Data]" :field="field" />
+          <DivRow
+            v-else
+            :value="data[field.key as keyof Data]"
+            :field="field"
+          />
         </template>
       </div>
-      <div v-else class="position-absolute top-50 start-50 translate-middle row gy-4">
-        <p ref="el" class="text-center text-primary-emphasis display-1">JSON TO HTML</p>
-        <button type="button" class="btn btn-outline-primary" @click="open()">Выбрать файл</button>
+
+      <div
+        v-else
+        class="position-absolute top-50 start-50 translate-middle row gy-4"
+      >
+        <p ref="el" class="text-center text-primary-emphasis display-1">
+          JSON TO HTML
+        </p>
+        <button
+          @mouseover="finish"
+          type="button"
+          class="btn btn-outline-primary"
+          @click="open()"
+        >
+          Выбрать файл
+        </button>
       </div>
     </Transition>
   </div>
