@@ -12,11 +12,15 @@ const data = props.field.foo ? props.value : row
 </script>
 
 <template>
+  <!-- Если поле не имеет ключа -->
   <div v-if="!props.field.key" class="row">
     <div class="col fw-semibold">{{ props.field.label }}</div>
   </div>
+  <!-- Если поле имеет ключ -->
   <div v-else-if="data" class="row">
-    <div v-bind="props.field.attr" class="col-4">{{ props.field.label }}</div>
+    <div :class="[props.field.attr ?? '', 'col-4']">
+      {{ props.field.label }}
+    </div>
     <div class="col-8">{{ data }}</div>
   </div>
 </template>

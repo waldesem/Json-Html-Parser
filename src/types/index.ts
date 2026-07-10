@@ -61,9 +61,10 @@ export interface Data {
 
 export interface Items {
   key: string
+  keys?: (keyof Data)[]
   label: string
   foo?: Function
-  attr?: object
+  attr?: string
 }
 
 export interface Schemas {
@@ -72,6 +73,6 @@ export interface Schemas {
   label?: string
   tag?: 'caption' | 'thead'
   foo?: Function
-  attr?: object
+  attr?: string
   items?: Items[]
 }

@@ -1,8 +1,14 @@
 import type { Schemas } from '@/types'
 
-const localStr = (str: string) => (str ? new Date(str).toLocaleDateString() : '')
+const localStr = (str: string) =>
+  str ? new Date(str).toLocaleDateString() : ''
 
 export const schema: Schemas[] = [
+  { keys: ['positionName', 'department'], attr: 'fw-semibold' },
+  {
+    keys: ['lastName', 'firstName', 'midName'],
+    attr: 'fw-bold text-uppercase text-decoration-underline',
+  },
   {
     key: 'birthday',
     label: 'Дата рождения',
@@ -33,7 +39,7 @@ export const schema: Schemas[] = [
     key: 'education',
     label: 'Образование',
     items: [
-      { key: 'educationType', label: 'Уровень', attr: { class: 'fw-medium' } },
+      { key: 'educationType', label: 'Уровень', attr: 'fw-medium' },
       { key: 'institutionName', label: 'Учебное заведение' },
       { key: 'endYear', label: 'Год окончания' },
       { key: 'specialty', label: 'Специальность' },
@@ -43,7 +49,7 @@ export const schema: Schemas[] = [
     key: 'experience',
     label: 'Работа',
     items: [
-      { key: 'name', label: 'Место работы', attr: { class: 'fw-medium' } },
+      { key: 'name', label: 'Место работы', attr: 'fw-medium' },
       { key: 'beginDate', label: 'Приём', foo: (row: string) => localStr(row) },
       {
         key: 'endDate',
@@ -75,7 +81,7 @@ export const schema: Schemas[] = [
     key: 'organizations',
     label: 'Участие в коммерческой деятельности',
     items: [
-      { key: 'name', label: 'Название', attr: { class: 'fw-medium' } },
+      { key: 'name', label: 'Название', attr: 'fw-medium' },
       { key: 'activity', label: 'Вид деятельности' },
       { key: 'inn', label: 'ИНН' },
     ],
