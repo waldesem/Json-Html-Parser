@@ -1,45 +1,29 @@
 <script setup lang="ts">
 import { shallowRef, useTemplateRef } from 'vue'
-import { useAnimate, useFileDialog } from '@vueuse/core'
 import { schema } from './schema'
 import DivRow from './components/DivRow.vue'
 import type { Conditions, Data } from './types'
 
-// Открытие диалога выбора файла
-const { open, onChange } = useFileDialog({
-  accept: '*.json',
-  multiple: false,
-})
-
 // Данные из файла json
 const datas = shallowRef<(Data & Conditions) | null>(null)
 
-// Обработка загруженного файла
-onChange(async (files) => {
-  if (files) {
+// Получаем ссылку на input для выбора файла
+const fileInput = useTemplateRef('fileInput')
+
+// Функция-триггер input для выбора файла
+function triggerFileInput() {
+  if (fileInput.value) fileInput.value.click()
+}
+
+// Функция для обработки изменения файла
+async function handleFileChange(event: Event) {
+  const target = event.target as HTMLInputElement
+  const files = target.files
+  if (files && files.length > 0) {
     const str = (await files[0]?.text()) as string
     datas.value = JSON.parse(str)
   }
-})
-
-// Получаем ссылку на элемент для анимации
-const el = useTemplateRef('el')
-
-// Анимация для элемента стартовой страницы
-const { finish } = useAnimate(
-  el,
-  [
-    { clipPath: 'circle(20% at 0% 30%)' },
-    { clipPath: 'circle(20% at 50% 80%)' },
-    { clipPath: 'circle(20% at 100% 30%)' },
-  ],
-  {
-    duration: 3000,
-    iterations: 3,
-    direction: 'alternate',
-    easing: 'cubic-bezier(0.46, 0.03, 0.52, 0.96)',
-  },
-)
+}
 
 const print = () => {
   window.print()
@@ -90,7 +74,7 @@ const print = () => {
 
       <!-- Кнопка печати -->
       <button
-        class="btn btn-outline-dark position-fixed bottom-0 end-0 m-4 d-print-none"
+        class="btn btn-outline-primary position-fixed bottom-0 end-0 m-4 d-print-none"
         style="z-index: 1050"
         type="button"
         @click="print()"
@@ -104,14 +88,17 @@ const print = () => {
       v-else
       class="position-absolute top-50 start-50 translate-middle row gy-4"
     >
-      <p ref="el" class="text-center text-primary-emphasis display-1">
-        JSON TO HTML
-      </p>
+      <p class="text-center text-primary-emphasis display-1">JSON TO HTML</p>
+      <input
+        ref="fileInput"
+        type="file"
+        @change="handleFileChange"
+        class="d-none"
+      />
       <button
-        @mouseover="finish"
         type="button"
         class="btn btn-outline-primary"
-        @click="open()"
+        @click="triggerFileInput()"
       >
         Выбрать файл
       </button>
