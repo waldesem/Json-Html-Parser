@@ -4,10 +4,10 @@ const localStr = (str: string) =>
   str ? new Date(str).toLocaleDateString() : ''
 
 export const schema: Schemas[] = [
-  { keys: ['positionName', 'department'], attr: 'fw-semibold' },
+  { keys: ['positionName', 'department'], attr: 'font-semibold' },
   {
     keys: ['lastName', 'firstName', 'midName'],
-    attr: 'fw-bold text-uppercase text-decoration-underline',
+    attr: 'font-bold text-upper text-underline',
   },
   {
     key: 'birthday',
@@ -39,7 +39,7 @@ export const schema: Schemas[] = [
     key: 'education',
     label: 'Образование',
     items: [
-      { key: 'educationType', label: 'Уровень', attr: 'fw-medium' },
+      { key: 'educationType', label: 'Уровень', attr: 'font-medium' },
       { key: 'institutionName', label: 'Учебное заведение' },
       { key: 'endYear', label: 'Год окончания' },
       { key: 'specialty', label: 'Специальность' },
@@ -49,7 +49,7 @@ export const schema: Schemas[] = [
     key: 'experience',
     label: 'Работа',
     items: [
-      { key: 'name', label: 'Место работы', attr: 'fw-medium' },
+      { key: 'name', label: 'Место работы', attr: 'font-medium' },
       { key: 'beginDate', label: 'Приём', foo: (row: string) => localStr(row) },
       {
         key: 'endDate',
@@ -81,7 +81,7 @@ export const schema: Schemas[] = [
     key: 'organizations',
     label: 'Участие в коммерческой деятельности',
     items: [
-      { key: 'name', label: 'Название', attr: 'fw-medium' },
+      { key: 'name', label: 'Название', attr: 'font-medium' },
       { key: 'activity', label: 'Вид деятельности' },
       { key: 'inn', label: 'ИНН' },
     ],

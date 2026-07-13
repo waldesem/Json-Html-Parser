@@ -34,25 +34,20 @@ const print = () => {
 </script>
 
 <template>
-  <div class="container-fluid">
+  <div class="fluid">
     <!-- Содержимое: данные из файла -->
-    <div v-if="datas" class="d-grid gap-0 row-gap-2">
+    <div v-if="datas" class="grid-display">
       <template v-for="fields of schema">
         <!--Если есть поле со списком ключей -->
-        <div v-if="fields.keys" class="row mb-2">
-          <div :class="['col', fields.attr]">
-            {{ fields.keys.map((key) => datas?.[key as keyof Data]).join(' ') }}
-          </div>
+        <div v-if="fields.keys" :class="fields.attr">
+          {{ fields.keys.map((key) => datas?.[key as keyof Data]).join(' ') }}
         </div>
 
         <!-- Если есть поле items с дочерними полями -->
         <template v-else-if="fields.items">
           <!--Если есть непустой список с данными -->
-          <div
-            v-if="datas[fields.key as keyof Conditions].length"
-            class="row mt-2"
-          >
-            <div class="col text-decoration-underline fw-semibold">
+          <div v-if="datas[fields.key as keyof Conditions].length">
+            <div class="text-underline font-semibold">
               {{ fields.label }}
             </div>
           </div>
@@ -77,7 +72,7 @@ const print = () => {
 
       <!-- Кнопка печати -->
       <button
-        class="btn btn-outline-primary position-fixed bottom-0 end-0 m-4 d-print-none"
+        class="button-outline position-fixed-bottom-end no-print"
         style="z-index: 1050"
         type="button"
         @click="print()"
@@ -87,49 +82,27 @@ const print = () => {
     </div>
 
     <!-- Стартовая страница: анимация и кнопка выбора файла -->
-    <div
-      v-else
-      class="position-absolute top-50 start-50 translate-middle row gy-4"
-    >
-      <p
+    <div v-else class="position-absolute-center">
+      <div
         :class="{ 'no-animation': !isAnimated }"
-        class="flashlight text-center text-primary-emphasis display-1"
+        class="flashlight font-color-primary heading"
       >
         JSON TO HTML
-      </p>
+      </div>
       <input
         ref="fileInput"
         type="file"
         @change="handleFileChange"
-        class="d-none"
+        class="hidden"
       />
       <button
         @mouseover="isAnimated = false"
         type="button"
-        class="btn btn-outline-primary"
+        class="button-outline"
         @click="triggerFileInput()"
       >
-        Выбрать файл
+        Выберите файл
       </button>
     </div>
   </div>
 </template>
-
-<style scoped>
-@keyframes move-circle {
-  0% {
-    clip-path: circle(15% at 10% 50%);
-  }
-  100% {
-    clip-path: circle(15% at 90% 50%);
-  }
-}
-
-.flashlight {
-  animation: move-circle 3s 3 alternate cubic-bezier(0.46, 0.03, 0.52, 0.96);
-}
-
-.flashlight.no-animation {
-  animation: none;
-}
-</style>
