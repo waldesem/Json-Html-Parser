@@ -5,10 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
@@ -17,10 +15,8 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "@tsconfig/node24": "^24.0.4",
-    "@types/node": "^26.1.1",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/tsconfig": "^0.9.1",
-    "npm-run-all2": "^9.0.2",
     "prettier": "3.9.5",
     "sass-embedded": "^1.100.0",
     "sass-loader": "^17.0.0",

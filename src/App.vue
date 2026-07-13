@@ -7,6 +7,9 @@ import type { Conditions, Data } from './types'
 // Данные из файла json
 const datas = shallowRef<(Data & Conditions) | null>(null)
 
+// Флаг анимации
+const isAnimated = shallowRef(true)
+
 // Получаем ссылку на input для выбора файла
 const fileInput = useTemplateRef('fileInput')
 
@@ -88,7 +91,12 @@ const print = () => {
       v-else
       class="position-absolute top-50 start-50 translate-middle row gy-4"
     >
-      <p class="text-center text-primary-emphasis display-1">JSON TO HTML</p>
+      <p
+        :class="{ 'no-animation': !isAnimated }"
+        class="flashlight text-center text-primary-emphasis display-1"
+      >
+        JSON TO HTML
+      </p>
       <input
         ref="fileInput"
         type="file"
@@ -96,6 +104,7 @@ const print = () => {
         class="d-none"
       />
       <button
+        @mouseover="isAnimated = false"
         type="button"
         class="btn btn-outline-primary"
         @click="triggerFileInput()"
@@ -105,3 +114,22 @@ const print = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+@keyframes move-circle {
+  0% {
+    clip-path: circle(15% at 10% 50%);
+  }
+  100% {
+    clip-path: circle(15% at 90% 50%);
+  }
+}
+
+.flashlight {
+  animation: move-circle 3s 3 alternate cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+
+.flashlight.no-animation {
+  animation: none;
+}
+</style>
