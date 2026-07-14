@@ -1,6 +1,6 @@
 # Json-Html-Parser
 
-Json-Html-Parser is a Vue application and Chromium extension that converts JSON data to HTML.
+Json-Html-Parser is a Vue-based web application and Chromium extension that converts JSON data to HTML.
 
 ## Installation
 

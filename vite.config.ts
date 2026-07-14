@@ -15,17 +15,4 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        silenceDeprecations: [
-          'import',
-          'color-functions',
-          'global-builtin',
-          'legacy-js-api',
-          'if-function',
-        ],
-      },
-    },
-  },
 })
