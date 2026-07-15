@@ -2,7 +2,7 @@
 import { shallowRef, useTemplateRef } from 'vue'
 import GitHub from './GitHub.vue'
 
-const emit = defineEmits(['fileChange'])
+const emit = defineEmits(['handle'])
 
 // Флаг анимации
 const isAnimated = shallowRef(true)
@@ -20,7 +20,7 @@ async function onFileChange(event: Event) {
   const files = target.files
   if (files && files.length > 0) {
     const str = (await files[0]?.text()) as string
-    emit('fileChange', str)
+    emit('handle', str)
   }
 }
 </script>

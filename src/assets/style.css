@@ -8,6 +8,17 @@
   }
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 @media print {
   .no-print {
     display: none !important;
@@ -24,7 +35,7 @@
 body {
   font-size: 16px;
   font-family: var(--font-family-sans);
-  background-color: antiquewhite;
+  background-color: papayawhip;
 }
 
 button {
@@ -55,6 +66,16 @@ button:hover {
 .container-fluid {
   padding: 0 10px;
   width: 100%;
+  height: 100vh;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .flashlight {
@@ -135,4 +156,26 @@ button:hover {
 
 .text-upper {
   text-transform: uppercase;
+}
+
+.toast-error {
+  background-color: #ef4444;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast-error button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
 }
