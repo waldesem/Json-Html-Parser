@@ -1,19 +1,11 @@
 <script setup lang="ts">
-import { shallowRef, useTemplateRef } from 'vue'
+import { useTemplateRef } from 'vue'
 import GitHub from './GitHub.vue'
 
 const emit = defineEmits(['handle'])
 
-// Флаг анимации
-const isAnimated = shallowRef(true)
-
 // Получаем ссылку на input для выбора файла
-const fileInput = useTemplateRef('fileInput')
-
-// Функция-триггер input для выбора файла
-function triggerFileInput() {
-  fileInput.value?.click()
-}
+const input = useTemplateRef('input')
 
 async function onFileChange(event: Event) {
   const target = event.target as HTMLInputElement
@@ -26,26 +18,18 @@ async function onFileChange(event: Event) {
 </script>
 
 <template>
-  <div class="flex-absolute-center background-font">
-    <div
-      :class="{ 'no-animation': !isAnimated }"
-      class="flashlight text-color heading"
-    >
-      JSON TO HTML
-    </div>
-    <input ref="fileInput" class="hidden" type="file" @change="onFileChange" />
-    <button
-      @mouseover="isAnimated = false"
-      type="button"
-      class="font-bold"
-      @click="triggerFileInput()"
-    >
-      Выберите файл
-    </button>
+  <div class="container absolute-center background-font">
+    <!-- GitHub link -->
     <div class="fixed-top-end" title="GitHub">
       <a href="https://github.com/waldesem/Json-Html-Parser" target="_blank">
         <GitHub />
       </a>
     </div>
+    <!-- Главная страница -->
+    <div class="heading">{ JSON } TO HTML</div>
+    <input ref="input" class="hidden" type="file" @change="onFileChange" />
+    <button type="button" class="btn font-bold" @click="input?.click()">
+      Выберите файл
+    </button>
   </div>
 </template>

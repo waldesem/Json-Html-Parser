@@ -26,3 +26,7 @@ npm run dev
 ```
 
 2. Open http://localhost:5173 in your browser
+
+## License
+
+Json-Html-Parser is licensed under the MIT License.

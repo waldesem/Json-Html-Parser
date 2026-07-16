@@ -9,24 +9,26 @@ const MainPage = defineAsyncComponent(() => import('./components/MainPage.vue'))
 // Данные файла json
 const datas = shallowRef<(Data & Conditions) | null>(null)
 
-// Ошибка парсинга json
-const error = shallowRef<string | null>(null)
+// Статус парсинга json
+const message = shallowRef<string | null>(null)
+const status = shallowRef<'error' | 'success'>('success')
 
 // Обработчик файла json
 function handleFileContent(str: string) {
   try {
     datas.value = JSON.parse(str)
+    message.value = 'Файл успешно загружен'
+    status.value = 'success'
   } catch (e) {
-    error.value = e instanceof Error ? e.message : 'Ошибка парсинга JSON'
+    message.value = e instanceof Error ? e.message : 'Ошибка парсинга JSON'
+    status.value = 'error'
   }
 }
 </script>
 
 <template>
-  <Transition name="fade">
-    <DataPage v-if="datas" :datas="datas" />
-    <MainPage v-else @handle="handleFileContent" />
-  </Transition>
+  <DataPage v-if="datas" :datas="datas" />
+  <MainPage v-else @handle="handleFileContent" />
 
-  <ToastDiv v-model="error" />
+  <ToastDiv v-model="message" :status="status" />
 </template>

@@ -7,13 +7,11 @@ const props = defineProps<{
   datas: Data & Conditions
 }>()
 
-const print = () => {
-  window.print()
-}
+const print = () => window.print()
 </script>
 
 <template>
-  <div class="grid-rows-auto-col">
+  <div class="fade container grid-rows-auto-col">
     <template v-for="fields of schema">
       <!--Если есть поле со списком ключей -->
       <div v-if="fields.keys" :class="fields.attr">
@@ -41,7 +39,7 @@ const print = () => {
         </template>
       </template>
 
-      <!-- Если нет дочерних полей -->
+      <!-- Если нет поле items -->
       <DivRow
         v-else
         :value="props.datas[fields.key as keyof Data]"
@@ -51,7 +49,7 @@ const print = () => {
 
     <!-- Кнопка печати -->
     <button
-      class="fixed-bottom-end font-semibold backdrop no-print"
+      class="btn fixed-top-end font-semibold backdrop no-print"
       type="button"
       @click="print()"
     >

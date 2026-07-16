@@ -1,14 +1,22 @@
-@keyframes move-circle {
-  0% {
-    clip-path: circle(20% at 10% 50%);
+@keyframes fade {
+  from {
+    opacity: 0;
   }
-
-  100% {
-    clip-path: circle(20% at 90% 50%);
+  to {
+    opacity: 1;
   }
 }
 
-@keyframes slideIn {
+@keyframes rotate {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes slide {
   from {
     transform: translateX(100%);
     opacity: 0;
@@ -35,10 +43,10 @@
 body {
   font-size: 16px;
   font-family: var(--font-family-sans);
-  background-color: papayawhip;
+  background: linear-gradient(120deg, antiquewhite, papayawhip 0%, wheat 100%);
 }
 
-button {
+.btn {
   background-color: transparent;
   border: 2px solid var(--primary-color);
   border-radius: 15px;
@@ -48,7 +56,7 @@ button {
   transition: all 0.3s ease-in-out;
 }
 
-button:hover {
+.btn:hover {
   color: #fff;
   background-color: var(--primary-color);
 }
@@ -64,36 +72,26 @@ button:hover {
 }
 
 .container-fluid {
-  padding: 0 10px;
   width: 100%;
-  height: 100vh;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.fade {
+  animation-name: fade;
+  animation-duration: 1s;
 }
 
-.flashlight {
-  animation: move-circle 3s 3 alternate cubic-bezier(0.46, 0.03, 0.52, 0.96);
-}
-
-.flashlight.no-animation {
-  animation: none;
-}
-
-.flex-absolute-center {
+.container {
   display: flex;
   position: absolute;
   flex-direction: column;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.absolute-center {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100%;
 }
 
 .font-bold {
@@ -124,8 +122,11 @@ button:hover {
 }
 
 .heading {
-  font-size: 76px;
-  margin: 20px;
+  display: inline-block;
+  font-size: 96px;
+  margin: 40px;
+  color: var(--primary-color);
+  animation: rotate 2s ease 0.5s;
 }
 
 .hidden {
@@ -146,10 +147,6 @@ button:hover {
   margin: 40px;
 }
 
-.text-color {
-  color: var(--primary-color);
-}
-
 .text-underline {
   text-decoration: underline;
 }
@@ -158,24 +155,28 @@ button:hover {
   text-transform: uppercase;
 }
 
-.toast-error {
-  background-color: #ef4444;
-  color: white;
+.toast {
+  display: flex;
+  align-items: center;
   padding: 12px 20px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: center;
+  color: white;
   gap: 10px;
   z-index: 9999;
-  animation: slideIn 0.3s ease-out;
+  animation: slide 0.3s ease-out;
 }
 
-.toast-error button {
+.toast-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 5px;
+  font-size: 18px;
   background: none;
+  opacity: 0.8;
   border: none;
   color: white;
-  font-size: 18px;
   cursor: pointer;
   line-height: 1;
 }
