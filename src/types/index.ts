@@ -1,11 +1,11 @@
-export interface Education {
+interface Education {
   educationType: string
   institutionName?: string
   endYear?: string
   specialty?: string
 }
 
-export interface Expirience {
+interface Expirience {
   name: string
   beginDate: string
   endDate?: string
@@ -15,7 +15,7 @@ export interface Expirience {
   fireReason?: string
 }
 
-export interface Names {
+interface Names {
   lastNameBeforeChange?: string
   firstNameBeforeChange?: string
   midNameBeforeChange?: string
@@ -23,7 +23,7 @@ export interface Names {
   reason?: string
 }
 
-export interface Organizations {
+interface Organizations {
   name: string
   activity: string
   inn?: string
