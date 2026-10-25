@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { defineAsyncComponent, shallowRef } from 'vue'
-import ToastDiv from './components/ToastDiv.vue'
-import type { Conditions, Data } from './types'
-
-const DataPage = defineAsyncComponent(() => import('./components/DataPage.vue'))
-const MainPage = defineAsyncComponent(() => import('./components/MainPage.vue'))
+import { shallowRef } from 'vue'
+import DataPage from '@/components/DataPage.vue'
+import MainPage from '@/components/MainPage.vue'
+import ToastDiv from '@/components/ToastDiv.vue'
+import type { Conditions, Data } from '@/types'
 
 // Данные файла json
 const datas = shallowRef<(Data & Conditions) | null>(null)
@@ -29,6 +28,5 @@ function handleFileContent(str: string) {
 <template>
   <DataPage v-if="datas" :datas="datas" />
   <MainPage v-else @handle="handleFileContent" />
-
   <ToastDiv v-model="message" :status="status" />
 </template>
