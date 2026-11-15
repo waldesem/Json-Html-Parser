@@ -46,6 +46,23 @@ body {
   background: floralwhite;
 }
 
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 260px;
+  padding: 16px;
+}
+
+.popup-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  white-space: nowrap;
+}
+
 .btn {
   background-color: transparent;
   border: 2px solid var(--primary-color);
