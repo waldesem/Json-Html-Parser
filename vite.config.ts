@@ -3,16 +3,23 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import zipPack from 'vite-plugin-zip-pack'
 
 export default defineConfig({
-  plugins: [vue(), vueDevTools()],
+  plugins: [
+    vue(),
+    vueDevTools(),
+    zipPack({
+      outDir: 'json-html-parser',
+      outFileName: 'json-html-parser.zip',
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   build: {
-    outDir: 'json-html-parser',
     emptyOutDir: true,
     modulePreload: false,
     rollupOptions: {
