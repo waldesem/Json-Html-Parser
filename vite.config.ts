@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'json-html-parser',
     emptyOutDir: true,
     modulePreload: false,
     rollupOptions: {
