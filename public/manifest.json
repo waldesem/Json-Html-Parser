@@ -5,8 +5,8 @@
   "version": "0.0.1",
   "host_permissions": ["file:///*"],
   "permissions": ["scripting", "tabs"],
-  "action": {},
-  "background": {
-    "service_worker": "background.js"
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Json-Html: Convert JSON to HTML"
   }
 }

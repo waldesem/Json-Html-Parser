@@ -13,5 +13,12 @@ export default defineConfig({
   },
   build: {
     emptyOutDir: true,
+    modulePreload: false,
+    rollupOptions: {
+      input: {
+        index: fileURLToPath(new URL('./index.html', import.meta.url)),
+        popup: fileURLToPath(new URL('./popup.html', import.meta.url)),
+      },
+    },
   },
 })

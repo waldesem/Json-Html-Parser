@@ -14,18 +14,20 @@ git clone https://github.com/waldesem/Json-Html-Parser.git
 
 ```bash
 cd Json-Html-Parser
-npm install
+bun i
 ```
 
-## Usage
+## Build the extension
 
-1. Run the application
+1. Build the project
 
 ```bash
-npm run dev
+npm run build
 ```
 
-2. Open http://localhost:5173 in your browser
+2. Open `chrome://extensions`, enable **Developer mode** and click **Load unpacked**, selecting the `dist` folder
+
+Clicking the extension icon opens a popup with the **Открыть приложение** button. The button opens the main page (`index.html`) in a new tab.
 
 ## License
 
